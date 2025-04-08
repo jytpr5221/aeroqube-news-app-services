@@ -26,7 +26,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger("api")
 
-creds_path = r"\tmp\google-creds.json"
+creds_path = os.path.join("tmp", "google_creds.json")
 creds_json = os.getenv("GOOGLE_CREDENTIALS")
 if not creds_json:
     logger.error("GOOGLE_CREDENTIALS not found in environment variables.")
