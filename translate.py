@@ -23,16 +23,9 @@ logger = logging.getLogger("translate")
 # Load environment variables
 load_dotenv()
 
-# Get credentials path from environment variable
+# Set up TTS credentials
+
 credentials_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
-
-if not credentials_path:
-    raise ValueError("GOOGLE_APPLICATION_CREDENTIALS is not set in .env file")
-
-# Set Google Cloud authentication
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credentials_path
-
-# Load TTS credentials
 if os.path.exists(credentials_path):
     tts_credentials = service_account.Credentials.from_service_account_file(credentials_path)
     logger.info(f"Loaded TTS credentials from {credentials_path}")

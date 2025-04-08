@@ -5,10 +5,11 @@ from datetime import datetime
 from flask import Flask, request, jsonify, send_from_directory
 from dotenv import load_dotenv
 from latest_extractor import LatestNewsExtractor, initialize_appwrite, upload_to_appwrite
-from translate import translate_article
 from google.cloud import texttospeech
 from google.oauth2 import service_account
 import shutil
+import atexit
+
 
 # Load environment variables
 load_dotenv()
@@ -25,13 +26,37 @@ logging.basicConfig(
 )
 logger = logging.getLogger("api")
 
+creds_path = r"\tmp\google-creds.json"
+creds_json = os.getenv("GOOGLE_CREDENTIALS")
+if not creds_json:
+    logger.error("GOOGLE_CREDENTIALS not found in environment variables.")
+    raise ValueError("Missing GOOGLE_CREDENTIALS")
+
+with open(creds_path, "w") as f:
+    f.write(creds_json)
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = creds_path
+
+
 # Set up TTS credentials
 credentials_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
 if os.path.exists(credentials_path):
     credentials = service_account.Credentials.from_service_account_file(credentials_path)
 else:
+    # logger.log(credentials_path)
     logger.warning(f"Warning: TTS credentials file not found at {credentials_path}")
     credentials = None
+
+def cleanup_creds():
+    if os.path.exists(creds_path):
+        try:
+            os.remove(creds_path)
+            logger.info(f"Deleted temp credentials file: {creds_path}")
+        except Exception as e:
+            logger.warning(f"Failed to delete temp creds file: {e}")
+
+atexit.register(cleanup_creds)
+
+from translate import translate_article
 
 # Initialize Appwrite client and storage
 appwrite_client, appwrite_storage = initialize_appwrite()
