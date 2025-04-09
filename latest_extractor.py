@@ -217,7 +217,7 @@ class LatestNewsExtractor:
             verbose=True
         )
         self.seed_url = "https://www.thehindu.com/latest-news/"
-        self.max_articles = 25  # Limit to 1 article
+        self.max_articles = 5  # Limit to 1 article
         
         # Navigation elements to be removed from content
         self.navigation_text = "Business Agri-Business Economy Industry Markets Budget Children Cities Cities Bengaluru Chennai Coimbatore Delhi Hyderabad Kochi Kolkata Kozhikode Madurai Mangaluru Mumbai Puducherry Thiruvananthapuram Tiruchirapalli Vijayawada Visakhapatnam Data Point Podcast Ebook Education Education Careers Colleges Schools Elections Entertainment Entertainment Art Dance Movies Music Reviews Theatre Environment Food Food Dining Features Guides Recipes Good Health Hunting Monkeypox Life & Style Life & Style Fashion Fitness Homes and gardens Luxury Motoring Travel News News India World States Cities Ground Zero Spotlight Opinion Editorial Cartoon Columns Comment Interview Lead Letters Open Page Corrections & Clarifications Real Estate ISRO Question Corner Society Society Faith History & Culture Sport Cricket Football Hockey Tennis Athletics Motorsport Races Other Sports Between Wickets Specials States States Andhra Pradesh Karnataka Kerala Tamil Nadu Telangana Andaman and Nicobar Islands Arunachal Pradesh Assam Bihar Chandigarh Chhattisgarh Daman, Diu, Dadra and Nagar Haveli Goa Gujarat Haryana Himachal Pradesh Jammu and Kashmir Jharkhand Lakshadweep Ladakh Madhya Pradesh Maharashtra Manipur Meghalaya Mizoram Nagaland Odisha Other States Punjab Rajasthan Sikkim Tripura Uttar Pradesh Uttarakhand West Bengal Decode Karnataka Focus Tamil Nadu Technology Technology Gadgets Internet Visual Story Brandhub"
