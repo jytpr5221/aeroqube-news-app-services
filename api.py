@@ -421,6 +421,11 @@ def extract_and_process(languages=None):
         logger.error(f"Error in extraction process: {e}")
         article_cache["processing"] = False
 
+@app.route("/")
+def index():
+    return "✅ Flask server is running on Render!"
+
+
 @app.route('/extract', methods=['POST'])
 def extract_news():
     """
