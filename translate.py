@@ -30,7 +30,7 @@ if os.path.exists(credentials_path):
     tts_credentials = service_account.Credentials.from_service_account_file(credentials_path)
     logger.info(f"Loaded TTS credentials from {credentials_path}")
 else:
-    logger.warning(f"Warning: TTS credentials file not found at {credentials_path}")
+    logger.warning(f"Warning: TTS credentials file not found at  {credentials_path}")
     tts_credentials = None
 
 # Initialize the Google Translate client
