@@ -45,14 +45,16 @@ else:
     # logger.log(credentials_path)
     logger.warning(f"Warning: TTS credentials file not found at {credentials_path}")
     credentials = None
-
+    
 def cleanup_creds():
     if os.path.exists(creds_path):
         try:
-            os.remove(creds_path)
-            logger.info(f"Deleted temp credentials file: {creds_path}")
+            # Clear the contents instead of removing the file
+            with open(creds_path, "w") as f:
+                f.write("")
+            logger.info(f"Cleared temp credentials file: {creds_path}")
         except Exception as e:
-            logger.warning(f"Failed to delete temp creds file: {e}")
+            logger.warning(f"Failed to clear temp creds file: {e}")
 
 atexit.register(cleanup_creds)
 
